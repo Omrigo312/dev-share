@@ -1,5 +1,5 @@
 # Users & Auth
-# @name checkToken
+# Check token
 GET http://localhost:5000/api/auth HTTP/1.1
 x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWY2N2Q3MmZjZTliOTcyYjljZDE5ZjFiIn0sImlhdCI6MTYwMDY0MDgxNSwiZXhwIjoxNjAxMDAwODE1fQ.ztur8Bzc7ArJvTWpcaiu6mGkIhi5tYlpYC_re4696uY
 ###
@@ -8,11 +8,16 @@ x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWY2N2Q3M
 GET http://localhost:5000/api/posts HTTP/1.1
 ###
 
-# Profiles
+# Get self profile
 GET http://localhost:5000/api/profile/me HTTP/1.1
 x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWY2N2Q3MmZjZTliOTcyYjljZDE5ZjFiIn0sImlhdCI6MTYwMDY0MDgxNSwiZXhwIjoxNjAxMDAwODE1fQ.ztur8Bzc7ArJvTWpcaiu6mGkIhi5tYlpYC_re4696uY
 ###
 
+# Get all profiles
+GET http://localhost:5000/api/profile/ HTTP/1.1
+###
+
+# Create profile
 POST http://localhost:5000/api/profile/ HTTP/1.1
 content-type: application/json
 x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWY2N2Q3MmZjZTliOTcyYjljZDE5ZjFiIn0sImlhdCI6MTYwMDY0MDgxNSwiZXhwIjoxNjAxMDAwODE1fQ.ztur8Bzc7ArJvTWpcaiu6mGkIhi5tYlpYC_re4696uY
@@ -30,18 +35,18 @@ x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWY2N2Q3M
 }
 ###
 
-# @name register
+# register
 POST http://localhost:5000/api/users HTTP/1.1
 content-type: application/json
 
 {
     "name": "Omri Goldstein",
-    "email": "omrigo312@gmail.com",
+    "email": "omrigo3122@gmail.com",
     "password": "omrigo312"
 }
 ###
 
-# @name login 
+# login
 POST http://localhost:5000/api/auth HTTP/1.1
 content-type: application/json
 

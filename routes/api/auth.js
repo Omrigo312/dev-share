@@ -8,7 +8,7 @@ const { check, validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
 
 // @route    GET api/auth
-// #desc     Authenticate user
+// @desc     Authenticate user
 // @access   Public
 router.get('/', auth, async (req, res) => {
   try {
@@ -21,7 +21,7 @@ router.get('/', auth, async (req, res) => {
 });
 
 // @route    POST api/auth
-// #desc     Authenticate user and get token
+// @desc     Login - authenticate user and get token 
 // @access   Public
 router.post(
   '/',
