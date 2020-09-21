@@ -1,0 +1,52 @@
+# Users & Auth
+# @name checkToken
+GET http://localhost:5000/api/auth HTTP/1.1
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWY2N2Q3MmZjZTliOTcyYjljZDE5ZjFiIn0sImlhdCI6MTYwMDY0MDgxNSwiZXhwIjoxNjAxMDAwODE1fQ.ztur8Bzc7ArJvTWpcaiu6mGkIhi5tYlpYC_re4696uY
+###
+
+# Posts
+GET http://localhost:5000/api/posts HTTP/1.1
+###
+
+# Profiles
+GET http://localhost:5000/api/profile/me HTTP/1.1
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWY2N2Q3MmZjZTliOTcyYjljZDE5ZjFiIn0sImlhdCI6MTYwMDY0MDgxNSwiZXhwIjoxNjAxMDAwODE1fQ.ztur8Bzc7ArJvTWpcaiu6mGkIhi5tYlpYC_re4696uY
+###
+
+POST http://localhost:5000/api/profile/ HTTP/1.1
+content-type: application/json
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWY2N2Q3MmZjZTliOTcyYjljZDE5ZjFiIn0sImlhdCI6MTYwMDY0MDgxNSwiZXhwIjoxNjAxMDAwODE1fQ.ztur8Bzc7ArJvTWpcaiu6mGkIhi5tYlpYC_re4696uY
+
+{
+    "company":"IDF",
+    "status":"Team Commander",
+    "skills":"HTML,CSS,Python,JavaScript,Java,Node.js,React,Linux,Windows",
+    "location":"Hod Hasharon, IL",
+    "bio":"I am a Junior software developer",
+    "githubusername":"omrigo312",
+    "twitter":"https://twitter.com/omrigo312",
+    "facebook":"https://facebook.com/omrigo312",
+    "linkedin":"https://linkedin.comin/omri-goldstein/"
+}
+###
+
+# @name register
+POST http://localhost:5000/api/users HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Omri Goldstein",
+    "email": "omrigo312@gmail.com",
+    "password": "omrigo312"
+}
+###
+
+# @name login 
+POST http://localhost:5000/api/auth HTTP/1.1
+content-type: application/json
+
+{
+    "email": "omrigo312@gmail.com",
+    "password": "omrigo312"
+}
+###
