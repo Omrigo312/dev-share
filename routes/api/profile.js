@@ -7,7 +7,7 @@ const Profile = require('../../models/Profile');
 const User = require('../../models/User');
 
 // @route    GET api/profile/me
-// @desc     Get current users profile
+// @desc     Get current user profile
 // @access   Private
 router.get('/me', auth, async (req, res) => {
   try {
@@ -160,5 +160,63 @@ router.delete('/', auth, async (req, res) => {
     res.status(500).json({ msg: 'Server error.' });
   }
 });
+
+// @route    PUT api/profile/experience
+// @desc     Add experience to profile
+// @access   Private
+router.put(
+  '/experience',
+  [
+    auth,
+    [
+      check('title', 'Title is required').not().isEmpty(),
+      check('company', 'Company name is required').not().isEmpty(),
+      check('from', 'Starting date is required').not().isEmpty(),
+    ],
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const {
+      title,
+      company,
+      location,
+      from,
+      to,
+      current,
+      description,
+    } = req.body;
+
+    // Build experience object
+    const newExperience = {
+      title,
+      company,
+      location,
+      from,
+      to,
+      current,
+      description,
+    };
+
+    // @todo update experience
+    try {
+      const profile = await Profile.findOne({ user: req.user.id });
+      if (!profile) {
+        return res.status(400).json({ msg: 'Profile not found' });
+      }
+      // Pushes to start rather than end
+      profile.experiences.unshift(newExperience);
+
+      await profile.save();
+      res.json(profile);
+    } catch (err) {
+      console.log(err.message);
+      res.status(500).json({ msg: 'Server error.' });
+    }
+  }
+);
 
 module.exports = router;

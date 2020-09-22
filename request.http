@@ -35,6 +35,21 @@ x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWY2N2Q3M
 }
 ###
 
+# Add experience to profile
+PUT http://localhost:5000/api/profile/experience HTTP/1.1
+content-type: application/json
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWY2N2Q3MmZjZTliOTcyYjljZDE5ZjFiIn0sImlhdCI6MTYwMDY0MDgxNSwiZXhwIjoxNjAxMDAwODE1fQ.ztur8Bzc7ArJvTWpcaiu6mGkIhi5tYlpYC_re4696uY
+
+{
+    "title":"Waiter",
+    "company":"Ahuzat Hasharon",
+    "location":"Hod Hasharon",
+    "from":"7-9-2017",
+    "to":"10-29-2017",
+    "desctiption":"terrible"
+}
+###
+
 # register
 POST http://localhost:5000/api/users HTTP/1.1
 content-type: application/json
