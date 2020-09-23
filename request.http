@@ -87,6 +87,21 @@ x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWY2N2Q3M
 }
 ###
 
+# Get all posts
+GET http://localhost:5000/api/posts HTTP/1.1
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWY2N2Q3MmZjZTliOTcyYjljZDE5ZjFiIn0sImlhdCI6MTYwMDY0MDgxNSwiZXhwIjoxNjAxMDAwODE1fQ.ztur8Bzc7ArJvTWpcaiu6mGkIhi5tYlpYC_re4696uY
+###
+
+# Get post by id
+GET http://localhost:5000/api/posts/5f6a3ccf680a961e10fc2d93 HTTP/1.1
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWY2N2Q3MmZjZTliOTcyYjljZDE5ZjFiIn0sImlhdCI6MTYwMDY0MDgxNSwiZXhwIjoxNjAxMDAwODE1fQ.ztur8Bzc7ArJvTWpcaiu6mGkIhi5tYlpYC_re4696uY
+###
+
+# Delete post by id
+DELETE http://localhost:5000/api/posts/5f6ba5c2cffd6129a477463a HTTP/1.1
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWY2N2Q3MmZjZTliOTcyYjljZDE5ZjFiIn0sImlhdCI6MTYwMDY0MDgxNSwiZXhwIjoxNjAxMDAwODE1fQ.ztur8Bzc7ArJvTWpcaiu6mGkIhi5tYlpYC_re4696uY
+###
+
 # register
 POST http://localhost:5000/api/users HTTP/1.1
 content-type: application/json
