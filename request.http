@@ -10,7 +10,7 @@ GET http://localhost:5000/api/posts HTTP/1.1
 
 # Get self profile
 GET http://localhost:5000/api/profile/me HTTP/1.1
-x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWY2N2Q3MmZjZTliOTcyYjljZDE5ZjFiIn0sImlhdCI6MTYwMDY0MDgxNSwiZXhwIjoxNjAxMDAwODE1fQ.ztur8Bzc7ArJvTWpcaiu6mGkIhi5tYlpYC_re4696uY
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWY3YjFiMDAyZTAyNjYzNDM4YjliZWVkIn0sImlhdCI6MTYwMjA3MDMzNiwiZXhwIjoxNjAyNDMwMzM2fQ.GwWC5jLYx9weNnbYkcPAD9B7gc_2qPktT5iyaPdYn0I
 ###
 
 # Get all profiles
@@ -20,18 +20,14 @@ GET http://localhost:5000/api/profile/ HTTP/1.1
 # Create profile
 POST http://localhost:5000/api/profile/ HTTP/1.1
 content-type: application/json
-x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWY2N2Q3MmZjZTliOTcyYjljZDE5ZjFiIn0sImlhdCI6MTYwMDY0MDgxNSwiZXhwIjoxNjAxMDAwODE1fQ.ztur8Bzc7ArJvTWpcaiu6mGkIhi5tYlpYC_re4696uY
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWY3YjFiMDAyZTAyNjYzNDM4YjliZWVkIn0sImlhdCI6MTYwMjA3MDMzNiwiZXhwIjoxNjAyNDMwMzM2fQ.GwWC5jLYx9weNnbYkcPAD9B7gc_2qPktT5iyaPdYn0I
 
 {
-    "company":"IDF",
-    "status":"Team Commander",
-    "skills":"HTML,CSS,Python,JavaScript,Java,Node.js,React,Linux,Windows",
+    "company":"IAF",
+    "status":"Weather Forcaster",
+    "skills":"Sun,Sky,Clouds",
     "location":"Hod Hasharon, IL",
-    "bio":"I am a Junior software developer",
-    "githubusername":"omrigo312",
-    "twitter":"https://twitter.com/omrigo312",
-    "facebook":"https://facebook.com/omrigo312",
-    "linkedin":"https://linkedin.comin/omri-goldstein/"
+    "bio":"I am a Weather Forcaster for the Israeli Air Force"
 }
 ###
 
