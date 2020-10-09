@@ -68,8 +68,9 @@ const AddEducation = ({ addEducation, history }) => {
         <div className="form-group">
           <input
             type="text"
-            placeholder="Field of Study"
+            placeholder="* Field of Study"
             name="fieldofstudy"
+            required
             value={fieldofstudy}
             onChange={(e) => onChange(e)}
           />
@@ -89,7 +90,6 @@ const AddEducation = ({ addEducation, history }) => {
               type="checkbox"
               name="current"
               checked={current}
-              value=""
               value={current}
               onChange={(e) => {
                 setFormData({ ...formData, current: !current });
