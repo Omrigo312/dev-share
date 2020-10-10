@@ -71,6 +71,7 @@ const AddExperience = ({ addExperience, history }) => {
           <input
             type="date"
             name="from"
+            required
             value={from}
             onChange={(e) => onChange(e)}
           />

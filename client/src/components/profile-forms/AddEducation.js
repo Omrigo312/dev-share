@@ -79,6 +79,7 @@ const AddEducation = ({ addEducation, history }) => {
           <h4>From Date</h4>
           <input
             type="date"
+            required
             name="from"
             value={from}
             onChange={(e) => onChange(e)}
