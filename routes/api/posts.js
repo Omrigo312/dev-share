@@ -135,7 +135,6 @@ router.put('/unlike/:id', auth, async (req, res) => {
     if (!post) {
       return res.status(404).json({ msg: 'Post not found.' });
     }
-
     // Check if the post has already been liked
     if (
       post.likes.filter((like) => like.user.toString() === req.user.id)
@@ -145,6 +144,7 @@ router.put('/unlike/:id', auth, async (req, res) => {
     }
 
     // Get remove index
+    
     const removeIndex = post.likes
       .map((like) => like.user.toString())
       .indexOf(req.user.id);

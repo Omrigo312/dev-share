@@ -76,7 +76,7 @@ GET http://localhost:5000/api/profile/github/omrigo312
 # Add post
 POST http://localhost:5000/api/posts HTTP/1.1
 content-type: application/json
-x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWY2N2Q3MmZjZTliOTcyYjljZDE5ZjFiIn0sImlhdCI6MTYwMDY0MDgxNSwiZXhwIjoxNjAxMDAwODE1fQ.ztur8Bzc7ArJvTWpcaiu6mGkIhi5tYlpYC_re4696uY
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWY2N2Q3MmZjZTliOTcyYjljZDE5ZjFiIn0sImlhdCI6MTYwMjQyNjg5OSwiZXhwIjoxNjAyNzg2ODk5fQ.hag0sxUsSopvgRAXz7QPKog3PrscogZwHfpwmzOPjJw
 
 {
     "text":"My first post"
@@ -94,8 +94,8 @@ x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWY2N2Q3M
 ###
 
 # Delete post
-DELETE http://localhost:5000/api/posts/5f6ba5c2cffd6129a477463a HTTP/1.1
-x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWY2N2Q3MmZjZTliOTcyYjljZDE5ZjFiIn0sImlhdCI6MTYwMDY0MDgxNSwiZXhwIjoxNjAxMDAwODE1fQ.ztur8Bzc7ArJvTWpcaiu6mGkIhi5tYlpYC_re4696uY
+DELETE http://localhost:5000/api/posts/5f83182d7219374e90016ed8 HTTP/1.1
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWY2N2Q3MmZjZTliOTcyYjljZDE5ZjFiIn0sImlhdCI6MTYwMjQyNjg5OSwiZXhwIjoxNjAyNzg2ODk5fQ.hag0sxUsSopvgRAXz7QPKog3PrscogZwHfpwmzOPjJw
 ###
 
 # Like a post
@@ -109,9 +109,9 @@ x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWY2N2Q3M
 ###
 
 # Comment on a post
-POST http://localhost:5000/api/posts/comment/5f6a3ccf680a961e10fc2d93 HTTP/1.1
+POST http://localhost:5000/api/posts/comment/5f83486a897fee48e0f57e4f HTTP/1.1
 content-type: application/json
-x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWY2N2Q3MmZjZTliOTcyYjljZDE5ZjFiIn0sImlhdCI6MTYwMDY0MDgxNSwiZXhwIjoxNjAxMDAwODE1fQ.ztur8Bzc7ArJvTWpcaiu6mGkIhi5tYlpYC_re4696uY
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWY2N2Q3MmZjZTliOTcyYjljZDE5ZjFiIn0sImlhdCI6MTYwMjQyNjg5OSwiZXhwIjoxNjAyNzg2ODk5fQ.hag0sxUsSopvgRAXz7QPKog3PrscogZwHfpwmzOPjJw
 
 {
     "text":"My second comment"
