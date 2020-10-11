@@ -23,7 +23,7 @@ const PostItem = ({
       </div>
       <div>
         <p className="my-1">{text}</p>
-        <p>
+        <p className="post-date">
           Posted on <Moment format="DD/MM/YYYY">{date}</Moment>
         </p>
         {showActions && (

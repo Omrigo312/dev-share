@@ -1,21 +1,19 @@
 import React, { Fragment, useState } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addExperience } from '../../actions/profile';
 
 const AddExperience = ({ addExperience, history }) => {
   const [formData, setFormData] = useState({
-    title: '',
     company: '',
+    title: '',
     location: '',
     from: '',
     to: '',
     current: false,
     description: '',
   });
-
-  const [toDateDisabled, toggleDisabled] = useState(false);
 
   const { company, title, location, from, to, current, description } = formData;
 
@@ -26,8 +24,8 @@ const AddExperience = ({ addExperience, history }) => {
     <Fragment>
       <h1 className="large text-primary">Add An Experience</h1>
       <p className="lead">
-        <i className="fas fa-user"></i>Add any developer/programming position
-        that you have had in the past
+        <i className="fas fa-code-branch" /> Add any developer/programming
+        positions that you have had in the past
       </p>
       <small>* = required field</small>
       <form
@@ -42,9 +40,9 @@ const AddExperience = ({ addExperience, history }) => {
             type="text"
             placeholder="* Job Title"
             name="title"
-            required
             value={title}
-            onChange={(e) => onChange(e)}
+            onChange={onChange}
+            required
           />
         </div>
         <div className="form-group">
@@ -52,9 +50,9 @@ const AddExperience = ({ addExperience, history }) => {
             type="text"
             placeholder="* Company"
             name="company"
-            required
             value={company}
-            onChange={(e) => onChange(e)}
+            onChange={onChange}
+            required
           />
         </div>
         <div className="form-group">
@@ -63,18 +61,12 @@ const AddExperience = ({ addExperience, history }) => {
             placeholder="Location"
             name="location"
             value={location}
-            onChange={(e) => onChange(e)}
+            onChange={onChange}
           />
         </div>
         <div className="form-group">
           <h4>From Date</h4>
-          <input
-            type="date"
-            name="from"
-            required
-            value={from}
-            onChange={(e) => onChange(e)}
-          />
+          <input type="date" name="from" value={from} onChange={onChange} />
         </div>
         <div className="form-group">
           <p>
@@ -83,9 +75,8 @@ const AddExperience = ({ addExperience, history }) => {
               name="current"
               checked={current}
               value={current}
-              onChange={(e) => {
+              onChange={() => {
                 setFormData({ ...formData, current: !current });
-                toggleDisabled(!toDateDisabled);
               }}
             />{' '}
             Current Job
@@ -97,22 +88,22 @@ const AddExperience = ({ addExperience, history }) => {
             type="date"
             name="to"
             value={to}
-            disabled={toDateDisabled ? 'disabled' : ''}
-            onChange={(e) => onChange(e)}
+            onChange={onChange}
+            disabled={current}
           />
         </div>
         <div className="form-group">
           <textarea
-            value={description}
-            onChange={(e) => onChange(e)}
             name="description"
             cols="30"
             rows="5"
             placeholder="Job Description"
-          ></textarea>
+            value={description}
+            onChange={onChange}
+          />
         </div>
         <input type="submit" className="btn btn-primary my-1" />
-        <Link to="/dashboard" className="btn my-1">
+        <Link className="btn btn-light my-1" to="/dashboard">
           Go Back
         </Link>
       </form>
@@ -124,4 +115,4 @@ AddExperience.propTypes = {
   addExperience: PropTypes.func.isRequired,
 };
 
-export default connect(null, { addExperience })(withRouter(AddExperience));
+export default connect(null, { addExperience })(AddExperience);

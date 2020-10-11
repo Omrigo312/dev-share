@@ -38,14 +38,14 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
       <p className="lead">
         <i className="fas fa-user"></i> Create Your DevShare Account
       </p>
-      <form className="form" onSubmit={(e) => onSubmit(e)}>
+      <form className="form" onSubmit={onSubmit}>
         <div className="form-group">
           <input
             type="text"
             placeholder="Name"
             name="name"
             value={name}
-            onChange={(e) => onChange(e)}
+            onChange={onChange}
             required
           />
         </div>
@@ -56,7 +56,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             name="email"
             value={email}
             required
-            onChange={(e) => onChange(e)}
+            onChange={onChange}
           />
           <small className="form-text">
             This site uses Gravatar, so if you want a profile image, use a
@@ -70,7 +70,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             minLength="6"
             name="password"
             value={password}
-            onChange={(e) => onChange(e)}
+            onChange={onChange}
           />
         </div>
         <div className="form-group">
@@ -80,7 +80,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             minLength="6"
             name="password2"
             value={password2}
-            onChange={(e) => onChange(e)}
+            onChange={onChange}
           />
         </div>
         <input type="submit" value="Register" className="btn btn-primary" />

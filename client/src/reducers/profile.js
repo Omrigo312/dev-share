@@ -5,7 +5,9 @@ import {
   UPDATE_PROFILE,
   GET_PROFILES,
   GET_REPOS,
+  NO_REPOS,
 } from '../actions/types';
+
 const initialState = {
   profile: null,
   profiles: [],
@@ -16,6 +18,7 @@ const initialState = {
 
 export default function (state = initialState, action) {
   const { type, payload } = action;
+
   switch (type) {
     case GET_PROFILE:
     case UPDATE_PROFILE:
@@ -30,12 +33,6 @@ export default function (state = initialState, action) {
         profiles: payload,
         loading: false,
       };
-    case CLEAR_PROFILE:
-      return {
-        ...state,
-        profile: null,
-        repos: [],
-      };
     case PROFILE_ERROR:
       return {
         ...state,
@@ -43,11 +40,22 @@ export default function (state = initialState, action) {
         loading: false,
         profile: null,
       };
+    case CLEAR_PROFILE:
+      return {
+        ...state,
+        profile: null,
+        repos: [],
+      };
     case GET_REPOS:
       return {
         ...state,
         repos: payload,
         loading: false,
+      };
+    case NO_REPOS:
+      return {
+        ...state,
+        repos: [],
       };
     default:
       return state;

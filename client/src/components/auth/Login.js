@@ -15,14 +15,14 @@ const Login = ({ login, isAuthenticated }) => {
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = async (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
     login(email, password);
   };
 
   // Redirect if logged in
-  if(isAuthenticated) {
-    return <Redirect to="/dashboard"/>
+  if (isAuthenticated) {
+    return <Redirect to="/dashboard" />;
   }
 
   return (
@@ -31,14 +31,14 @@ const Login = ({ login, isAuthenticated }) => {
       <p className="lead">
         <i className="fas fa-user"></i> Sign in to continue to DevShare.
       </p>
-      <form className="form" onSubmit={(e) => onSubmit(e)}>
+      <form className="form" onSubmit={onSubmit}>
         <div className="form-group">
           <input
             type="email"
             placeholder="Email Address"
             name="email"
             value={email}
-            onChange={(e) => onChange(e)}
+            onChange={onChange}
           />
         </div>
         <div className="form-group">
@@ -48,7 +48,7 @@ const Login = ({ login, isAuthenticated }) => {
             minLength="6"
             name="password"
             value={password}
-            onChange={(e) => onChange(e)}
+            onChange={onChange}
           />
         </div>
         <input type="submit" value="Login" className="btn btn-primary" />
