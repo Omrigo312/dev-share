@@ -5,6 +5,10 @@ const config = require('config');
 const auth = require('../../middleware/auth');
 const { check, validationResult } = require('express-validator');
 
+// Normalize gives us a proper url regardless of what the user entered
+const normalize = require('normalize-url');
+const checkObjectId = require('../../middleware/checkObjectId');
+
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
 const Post = require('../../models/Post');
@@ -64,46 +68,42 @@ router.post(
 
     // Build profile object
 
-    const profileFields = {};
-    profileFields.user = req.user.id;
-    if (company) profileFields.company = company;
-    if (website) profileFields.website = website;
-    if (location) profileFields.location = location;
-    if (bio) profileFields.bio = bio;
-    if (status) profileFields.status = status;
-    if (githubusername) profileFields.githubusername = githubusername;
-    if (skills) {
-      profileFields.skills = skills.split(',').map((skill) => skill.trim());
-    }
+    const profileFields = {
+      user: req.user.id,
+      company,
+      location,
+      website:
+        website && website !== ''
+          ? normalize(website, { forceHttps: true })
+          : '',
+      bio,
+      skills: Array.isArray(skills)
+        ? skills
+        : skills.split(',').map((skill) => ' ' + skill.trim()),
+      status,
+      githubusername,
+    };
 
     // Build social object
-    profileFields.social = {};
+    const socialFields = { youtube, twitter, instagram, linkedin, facebook };
 
-    if (youtube) profileFields.social.youtube = youtube;
-    if (twitter) profileFields.social.twitter = twitter;
-    if (facebook) profileFields.social.facebook = facebook;
-    if (linkedin) profileFields.social.linkedin = linkedin;
-    if (instagram) profileFields.social.instagram = instagram;
+    for (const [key, value] of Object.entries(socialFields)) {
+      if (value && value.length > 0)
+        socialFields[key] = normalize(value, { forceHttps: true });
+    }
+    profileFields.social = socialFields;
 
     try {
-      let profile = await Profile.findOne({ user: req.user.id });
-      if (profile) {
-        // Update profile
-        profile = await Profile.findOneAndUpdate(
-          { user: req.user.id },
-          { $set: profileFields },
-          { new: true }
-        );
-        return res.json(profile);
-      }
-
-      // Create profile
-      profile = new Profile(profileFields);
-      await profile.save();
+      // Using upsert option (creates new doc if no match is found):
+      let profile = await Profile.findOneAndUpdate(
+        { user: req.user.id },
+        { $set: profileFields },
+        { new: true, upsert: true, setDefaultsOnInsert: true }
+      );
       res.json(profile);
     } catch (err) {
-      console.log(err.message);
-      res.status(500).send('Server error.');
+      console.error(err.message);
+      res.status(500).send('Server Error');
     }
   }
 );
@@ -124,25 +124,24 @@ router.get('/', async (req, res) => {
 // @route    GET api/profile/user/:user_id
 // @desc     Get profile by user ID
 // @access   Public
-router.get('/user/:user_id', async (req, res) => {
-  try {
-    const profile = await Profile.findOne({
-      user: req.params.user_id,
-    }).populate('user', ['name', 'avatar']);
+router.get(
+  '/user/:user_id',
+  checkObjectId('user_id'),
+  async ({ params: { user_id } }, res) => {
+    try {
+      const profile = await Profile.findOne({
+        user: user_id,
+      }).populate('user', ['name', 'avatar']);
 
-    if (!profile) {
-      return res.status(400).json({ msg: 'Profile not found' });
-    }
+      if (!profile) return res.status(400).json({ msg: 'Profile not found' });
 
-    res.json(profile);
-  } catch (err) {
-    console.log(err.message);
-    if (err.kind == 'ObjectId') {
-      return res.status(400).json({ msg: 'Profile not found' });
+      return res.json(profile);
+    } catch (err) {
+      console.error(err.message);
+      return res.status(500).json({ msg: 'Server error' });
     }
-    res.status(500).json({ msg: 'Server error.' });
   }
-});
+);
 
 // @route    DELETE api/profile
 // @desc     Delete profile, user and posts
@@ -175,7 +174,10 @@ router.put(
     [
       check('title', 'Title is required').not().isEmpty(),
       check('company', 'Company name is required').not().isEmpty(),
-      check('from', 'Starting date is required').not().isEmpty(),
+      check('from', 'Starting date is required')
+        .not()
+        .isEmpty()
+        .custom((value, { req }) => (req.body.to ? value < req.body.to : true)),
     ],
   ],
   async (req, res) => {
@@ -321,31 +323,22 @@ router.delete('/education/:edu_id', auth, async (req, res) => {
 // @route    Get api/profile/github/:username
 // @desc     Get user repositories from github.
 // @access   Public
-router.get('/github/:username', (req, res) => {
+router.get('/github/:username', async (req, res) => {
   try {
-    const options = {
-      uri: `https://api.github.com/users/${
-        req.params.username
-      }/repos?pre_page=5&sort=created:asc&client_id=${config.get(
-        'githubId'
-      )}&client_secret=${config.get('githubSecret')}`,
-      method: 'GET',
-      headers: { 'user-agent': 'node.js' },
+    const uri = encodeURI(
+      `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc`
+    );
+    const headers = {
+      'user-agent': 'node.js',
+      Authorization: `token ${config.get('githubToken')}`,
     };
 
-    request(options, (error, response, body) => {
-      if (error) {
-        return console.log(error);
-      }
-      if (response.statusCode !== 200) {
-        return res.status(404).json({ msg: 'No Github profile found' });
-      }
-
-      res.json(JSON.parse(body));
-    });
-  } catch (er) {
-    console.log(err.message);
-    res.status(500).send('Server error');
+    const gitHubResponse = await axios.get(uri, { headers });
+    return res.json(gitHubResponse.data);
+  } catch (err) {
+    console.error(err.message);
+    return res.status(404).json({ msg: 'No Github profile found' });
   }
 });
+
 module.exports = router;
