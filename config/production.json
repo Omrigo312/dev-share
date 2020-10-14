@@ -1,0 +1,7 @@
+{
+  "mongoURI": "mongodb+srv://omrigo312:MongoDB312@DevShare.kbtn7.mongodb.net/dev?retryWrites=true&w=majority",
+  "jwtSecret": "mySecretToken",
+  "jwtTimeOut": "5 days",
+  "githubId": "55ef797c373c00af8b71",
+  "githubSecret": "19781fff1c150eba91dbf92313f113047318acdc"
+}
